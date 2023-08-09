@@ -1,8 +1,15 @@
 // Remember, we're gonna use strict mode in all scripts now!
 'use strict';
 
-const abcd = 23;
+const getKeivin = function () {
+  const temperature = {
+    value: prompt('What is the temperatur in C: '),
+  };
+  debugger;
+  const keivin = Number(temperature.value) + 273;
 
-const calcAge = birthYear => 2047 - birthYear;
+  return keivin;
+};
 
-console.log(calcAge(1990));
+const keivinValue = getKeivin();
+console.log(keivinValue);
