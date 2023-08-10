@@ -68,6 +68,7 @@ btnRoll.addEventListener('click', function () {
 btnHold.addEventListener('click', function () {
   if (playing) {
     //1. Add current to the active player's score
+    diceEl.classList.add('hidden');
     totalScore[playerActive] += currentScore;
     document.getElementById(`score--${playerActive}`).textContent =
       totalScore[playerActive];
