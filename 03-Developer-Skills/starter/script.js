@@ -6,3 +6,5 @@ const abcd = 23;
 const calcAge = birthYear => 2047 - birthYear;
 
 console.log(calcAge(1990));
+
+console.log('Bad');
