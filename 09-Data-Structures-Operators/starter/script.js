@@ -100,9 +100,10 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-// 1.
+1;
 const players1 = Object.assign([], game.players[0]);
 const players2 = Object.assign([], game.players[1]);
+
 // 2.
 const [gk, ...fieldPlayers] = [...players1];
 console.log(gk);
@@ -114,10 +115,15 @@ console.log(allPlayers);
 const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 console.log(players1Final);
 // 5.
-const { team1, x: draw, team2 } = { ...game.odds };
+// const { team1, x: draw, team2 } = game.odds;
+//OR nested destruction
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
 console.log(team1, draw, team2);
 // 6.
 game.printGoals('Lewandowski', 'Gnarby', 'Lewandowski', 'Neuer');
+game.printGoals(...game.scored);
 // 7.
 const winner = (game.odds.team1 < game.odds.team2 && 1) || 2;
 console.log(winner);
