@@ -26,4 +26,52 @@ const restaurant = {
       close: 24,
     },
   },
+
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 1,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 };
+
+// mutating variables
+// let a = 111;
+// let b = 999;
+// const obj = { a: 23, b: 7, c: 14 };
+// ({ a, b } = obj);
+// console.log(a, b);
+
+// destructing objects as argument
+// arguments 不需要讲究顺序
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'Via del sole, 21',
+//   mainIndex: 2,
+//   starterIndex: 2,
+// });
+
+// spread operator
+const mainMenuCopy = [...restaurant.mainMenu];
+
+// AND / OR
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+// console.log(guests);
+
+// nullish coalescing operator
+const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(guestCorrect);
+
+// for of looping
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+console.log(menu.entries());
