@@ -150,8 +150,8 @@ GOOD LUCK 😀
 */
 
 // //1;
-// const players1 = Object.assign([], game.players[0]);
-// const players2 = Object.assign([], game.players[1]);
+const players1 = Object.assign([], game.players[0]);
+const players2 = Object.assign([], game.players[1]);
 
 // // 2.
 // const [gk, ...fieldPlayers] = [...players1];
@@ -306,3 +306,60 @@ for (const [time, event] of gameEvents) {
     console.log(`[SECOND HALF] ${time}: ${event}`);
   }
 }
+
+// string method
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replaceAll('door', 'gate'));
+
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '++'));
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+console.log('Challeng4'.padStart(20, '+').padEnd(20, '+'));
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const texts = text.split('\n');
+  for (const [index, eachText] of texts.entries()) {
+    const [first, second] = eachText.trim().toLowerCase().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(output.padEnd(20, ' ') + '✅'.repeat(index + 1));
+  }
+});
