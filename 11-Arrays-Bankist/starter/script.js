@@ -371,6 +371,10 @@ console.log(ownerEatTooMuch, ownerEatTooLittle);
 console.log(`${ownerEatTooMuch.join(' and ')}'s dog eat too much!`);
 console.log(`${ownerEatTooLittle.join(' and ')}'s dog eat too little!`);
 
+console.log(ownerEatTooMuch);
+ownerEatTooMuch.forEach((owner, i, owners) => (owners[i] += ' and '));
+console.log(ownerEatTooMuch);
+
 // 5.
 const dogEatSame = dogs.some(dog => dog.curFood === dog.recommendedFood);
 console.log(dogEatSame);
