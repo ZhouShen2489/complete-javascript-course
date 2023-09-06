@@ -341,7 +341,9 @@ const dogs = [
 ];
 
 // 1.
-dogs.forEach(dog => (dog.recommendedFood = Math.pow(dog.weight, 0.75) * 28));
+dogs.forEach(
+  dog => (dog.recommendedFood = Math.trunc(Math.pow(dog.weight, 0.75) * 28))
+);
 console.log(dogs);
 
 // 2.
@@ -351,13 +353,41 @@ console.log(
 );
 
 // 3.
-const { ownerEatTooMuch, ownerEatTooLittle } = dogs.reduce(
-  (owner, dog) => {
+let { ownerEatTooMuch, ownerEatTooLittle } = dogs.reduce(
+  (ownerEat, dog) => {
     dog.curFood > dog.recommendedFood
-      ? owner.ownerEatTooMuch.push(dog.owners)
-      : owner.ownerEatTooLittle.push(dog.owners);
+      ? ownerEat.ownerEatTooMuch.push(dog.owners)
+      : ownerEat.ownerEatTooLittle.push(dog.owners);
+    return ownerEat;
   },
   { ownerEatTooMuch: [], ownerEatTooLittle: [] }
 );
-console.log(ownerEatTooMuch);
-console.log(ownerEatTooLittle);
+
+ownerEatTooMuch = ownerEatTooMuch.flat();
+ownerEatTooLittle = ownerEatTooLittle.flat();
+console.log(ownerEatTooMuch, ownerEatTooLittle);
+
+// 4.
+console.log(`${ownerEatTooMuch.join(' and ')}'s dog eat too much!`);
+console.log(`${ownerEatTooLittle.join(' and ')}'s dog eat too little!`);
+
+// 5.
+const dogEatSame = dogs.some(dog => dog.curFood === dog.recommendedFood);
+console.log(dogEatSame);
+
+// 6.
+const checkDogEatOk = dog =>
+  dog.curFood > dog.recommendedFood * 0.9 &&
+  dog.curFood < dog.recommendedFood * 1.1;
+const dogEatOK = dogs.some(checkDogEatOk);
+console.log(dogEatOK);
+
+// 7.
+const dogEatOKList = dogs.filter(checkDogEatOk);
+console.log(dogEatOKList);
+
+// 8.
+const dogsSorted = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(dogsSorted);
