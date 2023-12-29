@@ -1,23 +1,37 @@
 // Remember, we're gonna use strict mode in all scripts now!
 'use strict';
 
-const getKeivin = function () {
-  const temperature = {
-    value: prompt('What is the temperatur in C: '),
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+    // value: Number(prompt('Degrees celsius: ')),
+    value: 10,
   };
-  debugger;
-  const keivin = Number(temperature.value) + 273;
 
-  return keivin;
+  // console.log(measurement);
+  // console.table(measurement);
+  // console.log(measurement.value);
+  // console.warn(measurement.value);
+  // console.error(measurement.value);
+
+  const kelvin = measurement.value + 273;
+  return kelvin;
 };
 
-<<<<<<< HEAD
-console.log(calcAge(1990));
+console.log(measureKelvin());
 
-console.log('Bad');
-||||||| c2aac23
-console.log(calcAge(1990));
-=======
-const keivinValue = getKeivin();
-console.log(keivinValue);
->>>>>>> 61ced4c9a379380677a389885b1bef7659764c2f
+//Challenge
+
+const printForecast = function (arr) {
+  let finalSentence = '';
+  for (let i = 0; i < arr.length; i++) {
+    finalSentence += `...${arr[i]}℃ in ${i + 1} days `;
+  }
+  return (finalSentence += '...');
+};
+
+const arr1 = [17, 21, 23];
+const arr2 = [12, 5, -5, 0, 4];
+console.log(printForecast(arr1));
+console.log(printForecast(arr2));

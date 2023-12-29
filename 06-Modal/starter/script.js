@@ -1,34 +1,64 @@
 'use strict';
 
+// const modal = document.querySelector('.modal');
+// const overlay = document.querySelector('.overlay');
+// const btnCloseModal = document.querySelector('.close-modal');
+// const btnOpenModal = document.querySelectorAll('.show-modal');
+
+// const openModal = function () {
+//   modal.classList.add('hidden');
+//   overlay.classList.add('hidden');
+// };
+
+// const closeModal = function () {
+//   modal.classList.remove('hidden');
+//   overlay.classList.remove('hidden');
+// };
+
+// for (let i = 0; i < btnOpenModal.length; i++) {
+//   btnOpenModal[i].addEventListener('click', openModal);
+// }
+
+// btnCloseModal.addEventListener('click', closeModal);
+
+// overlay.addEventListener('click', closeModal);
+
+// document.addEventListener('keypress', function (e) {
+//   console.log('Key press down');
+//   console.log(e);
+
+//   if (e.code === 'Enter' && !modal.classList.contains('hidden')) {
+//     modal.classList.remove('hidden');
+//     overlay.classList.remove('hidden');
+//   }
+// });
+
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.close-modal');
-const btnOpenModal = document.querySelectorAll('.show-modal');
+const btnShowModal = document.querySelectorAll('.show-modal');
 
-const openModal = function () {
+const closeModal = function () {
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
 
-const closeModal = function () {
+const showModal = function () {
+  // console.log('Button Clicked');
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
 
-for (let i = 0; i < btnOpenModal.length; i++) {
-  btnOpenModal[i].addEventListener('click', openModal);
-}
+for (let i = 0; i < btnShowModal.length; i++)
+  btnShowModal[i].addEventListener('click', showModal);
 
 btnCloseModal.addEventListener('click', closeModal);
 
 overlay.addEventListener('click', closeModal);
 
-document.addEventListener('keypress', function (e) {
-  console.log('Key press down');
-  console.log(e);
-
-  if (e.code === 'Enter' && !modal.classList.contains('hidden')) {
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
+document.addEventListener('keydown', function (e) {
+  console.log(e.key);
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
   }
 });
