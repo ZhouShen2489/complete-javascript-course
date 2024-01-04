@@ -1,5 +1,12 @@
 'use strict';
 
+const addTax =
+  value =>
+  (rate = 0.23) =>
+    value + value * rate;
+
+console.log(addTax(100)(0.5));
+
 // function as a return
 // const greet = function (greeting) {
 //   return function (name) {
@@ -51,30 +58,34 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
 */
-
+console.log('===========POLL===========');
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
-  displayResults(type = 'array') {
-    if (type === 'string') {
-      console.log(`Poll results are ${[...this.answers]}`);
-    } else {
-      console.log(this.answers);
-    }
-  },
-  registerNewAnswer(type = 'array') {
-    let answer =
+
+  registerNewAnswer() {
+    const choose = Number(
       prompt(
-        `${this.questions}\n${this.options.join('\n')}\nWrite option number`
-      ) || 'No answer';
-    if (answer !== 'No answer') {
-      answer = Number(answer);
-    }
-    typeof answer === 'number' && answer <= 3 && this.answers[answer]++;
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
+    typeof choose === 'number' &&
+      choose >= 0 &&
+      choose <= 3 &&
+      this.answers[choose]++;
+    console.log(this.answers);
     this.displayResults();
     this.displayResults('string');
+  },
+
+  displayResults(type = 'array') {
+    if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    } else if (type === 'array') {
+      // console.log(this.answers);
+    }
   },
 };
 
@@ -82,13 +93,67 @@ document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
+const test1 = [5, 2, 3];
+const test2 = [1, 5, 3, 9, 6, 1];
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
-poll.displayResults.call({ answers: [1, 5, 3, 9, 6] }, 'string');
-const greeter2 = greet2('Hi!');
-console.log(typeof greeter2);
-greeter2('Shen');
+poll.displayResults.apply({ answers: [5, 2, 3] }, ['array']);
+const printArr = poll.displayResults.bind({ answers: [5, 2, 3] });
+printArr('string');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'array');
+
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section 😃
+//   answers: new Array(4).fill(0),
+//   displayResults(type = 'array') {
+//     if (type === 'string') {
+//       console.log(`Poll results are ${[...this.answers]}`);
+//     } else {
+//       console.log(this.answers);
+//     }
+//   },
+//   registerNewAnswer(type = 'array') {
+//     let answer =
+//       prompt(
+//         `${this.questions}\n${this.options.join('\n')}\nWrite option number`
+//       ) || 'No answer';
+//     if (answer !== 'No answer') {
+//       answer = Number(answer);
+//     }
+//     typeof answer === 'number' && answer <= 3 && this.answers[answer]++;
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+// };
+
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+// poll.displayResults.call({ answers: [1, 5, 3, 9, 6] }, 'string');
+// const greeter2 = greet2('Hi!');
+// console.log(typeof greeter2);
+// greeter2('Shen');
 
 // closure
+// Example 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+// a is inside the backpack of the g
+g();
+f();
+console.dir(f);
+
+// Example 2
+
 const boarding = function (n, wait) {
   const perGroup = n / 3;
   setTimeout(function () {
@@ -118,7 +183,7 @@ GOOD LUCK 😀
   const header = document.querySelector('h1');
   header.style.color = 'red';
 
-  document.querySelector('body').addEventListener('click', function () {
+  document.body.addEventListener('click', function () {
     header.style.color = 'blue';
   });
 })();
